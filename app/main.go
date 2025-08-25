@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "github.com/szks-repo/small-business-agents/app/app/cmd"
 
 func main() {
-	fmt.Println("Hello")
+	cmd.Execute()
 }
