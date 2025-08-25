@@ -29,7 +29,8 @@ async fn webhook_handler(
 
 #[tokio::main]
 async fn main() {
-    // 環境変数を設定
+    dotenvy::dotenv().ok();
+    
     let endpoint_url = env::var("AWS_ENDPOINT_URL").expect("AWS_ENDPOINT_URL must be set");
     let region_provider = RegionProviderChain::first_try(Region::new("us-east-1"));
     let shared_config = aws_config::from_env()
