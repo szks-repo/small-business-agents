@@ -42,10 +42,13 @@ var webhookReceiverCmd = &cobra.Command{
 				return
 			}
 
-			_, err = sqsClient.SendMessage(ctx, &sqs.SendMessageInput{
+			if _, err := sqsClient.SendMessage(ctx, &sqs.SendMessageInput{
 				MessageBody: aws.String(string(body)),
 				QueueUrl:    &queueURL,
-			})
+			}); err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
 		})
 		srv := http.Server{Addr: ":3000", Handler: mux}
 		srv.ListenAndServe()
