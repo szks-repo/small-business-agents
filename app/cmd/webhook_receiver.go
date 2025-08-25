@@ -22,10 +22,9 @@ var webhookReceiverCmd = &cobra.Command{
 			log.Println("No .env file found, using environment variables")
 		}
 
-		// SQSクライアントの初期化
-		endpointURL := os.Getenv("AWS_ENDPOINT_URL")
+		// endpointURL := os.Getenv("AWS_ENDPOINT_URL")
 		region := os.Getenv("AWS_REGION")
-		queueURL = os.Getenv("SQS_QUEUE_URL")
+		queueURL := os.Getenv("SQS_QUEUE_URL")
 
 		cfg, err := config.LoadDefaultConfig(ctx,
 			config.WithRegion(region),
@@ -33,7 +32,7 @@ var webhookReceiverCmd = &cobra.Command{
 		if err != nil {
 			panic(err)
 		}
-		sqsClient = sqs.NewFromConfig(cfg)
+		sqsClient := sqs.NewFromConfig(cfg)
 
 		mux := http.NewServeMux()
 		mux.HandleFunc("POST /webhook", func(w http.ResponseWriter, r *http.Request) {
