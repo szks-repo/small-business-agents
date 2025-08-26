@@ -1,0 +1,8 @@
+[tasks.run-app-receiver]
+run = 'go run app/main.go webhookReceiver'
+
+[tasks.run-app-processor]
+run = 'go run app/main.go webhookProcessor'
+
+[tasks.exec-create-test-event]
+run = 'go run app/main.go createTestEvent'
