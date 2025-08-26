@@ -6,6 +6,8 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+	"path/filepath"
+	"runtime"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
@@ -19,7 +21,9 @@ var webhookReceiverCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		ctx := cmd.Context()
 
-		if err := godotenv.Load("../.env"); err != nil {
+		_, file, _, _ := runtime.Caller(0)
+		envPath := filepath.Join(file, "../../../.env")
+		if err := godotenv.Load(envPath); err != nil {
 			slog.Info("No .env file found, using environment variables")
 		}
 
@@ -29,9 +33,7 @@ var webhookReceiverCmd = &cobra.Command{
 			region = "ap-northeast-1"
 		}
 
-		cfg, err := config.LoadDefaultConfig(ctx,
-			config.WithRegion(region),
-		)
+		cfg, err := config.LoadDefaultConfig(ctx, config.WithRegion(region))
 		if err != nil {
 			panic(err)
 		}
