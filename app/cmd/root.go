@@ -1,8 +1,12 @@
 package cmd
 
 import (
+	"log/slog"
 	"os"
+	"path/filepath"
+	"runtime"
 
+	"github.com/joho/godotenv"
 	"github.com/spf13/cobra"
 )
 
@@ -15,6 +19,13 @@ examples and usage of using your application. For example:
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
+	PersistentPreRun: func(*cobra.Command, []string) {
+		_, file, _, _ := runtime.Caller(0)
+		envPath := filepath.Join(file, "../../../.env")
+		if err := godotenv.Load(envPath); err != nil {
+			slog.Info("No .env file found, using environment variables")
+		}
+	},
 }
 
 func Execute() {

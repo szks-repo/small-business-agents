@@ -7,11 +7,8 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"path/filepath"
-	"runtime"
 	"time"
 
-	"github.com/joho/godotenv"
 	"github.com/samber/lo"
 	"github.com/spf13/cobra"
 )
@@ -25,12 +22,6 @@ var createTestEventCmd = &cobra.Command{
 		slog.Info("createTestEvent start")
 
 		ctx := cmd.Context()
-
-		_, file, _, _ := runtime.Caller(0)
-		envPath := filepath.Join(file, "../../../.env")
-		if err := godotenv.Load(envPath); err != nil {
-			slog.Info("No .env file found, using environment variables")
-		}
 
 		payload := lo.Must(json.Marshal(map[string]any{
 			"ts":      time.Now(),
