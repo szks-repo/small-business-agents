@@ -26,9 +26,6 @@ var webhookProcessorCmd = &cobra.Command{
 
 		endpoint := os.Getenv("SQS_ENDPOINT")
 		region := os.Getenv("AWS_REGION")
-		if region == "" {
-			region = "ap-northeast-1"
-		}
 
 		cfg, err := config.LoadDefaultConfig(ctx,
 			config.WithRegion(region),
