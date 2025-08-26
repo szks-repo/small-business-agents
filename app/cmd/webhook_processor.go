@@ -45,12 +45,12 @@ var webhookProcessorCmd = &cobra.Command{
 			panic(err)
 		}
 
+		slog.Info("Worker Started")
 		for {
 			received, err := sqsClient.ReceiveMessage(ctx, &sqs.ReceiveMessageInput{
-				QueueUrl:            queueUrl.QueueUrl,
-				MaxNumberOfMessages: 20,
-				VisibilityTimeout:   300,
-				WaitTimeSeconds:     20,
+				QueueUrl:          queueUrl.QueueUrl,
+				VisibilityTimeout: 300,
+				WaitTimeSeconds:   20,
 			})
 			if err != nil {
 				slog.Error("Failed to ReceiveMessage", "error", err)
