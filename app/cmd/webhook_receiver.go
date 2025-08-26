@@ -1,8 +1,9 @@
 package cmd
 
 import (
+	"encoding/json"
 	"io"
-	"log"
+	"log/slog"
 	"net/http"
 	"os"
 
@@ -19,12 +20,14 @@ var webhookReceiverCmd = &cobra.Command{
 		ctx := cmd.Context()
 
 		if err := godotenv.Load("../.env"); err != nil {
-			log.Println("No .env file found, using environment variables")
+			slog.Info("No .env file found, using environment variables")
 		}
 
-		// endpointURL := os.Getenv("AWS_ENDPOINT_URL")
+		endpoint := os.Getenv("SQS_ENDPOINT")
 		region := os.Getenv("AWS_REGION")
-		queueURL := os.Getenv("SQS_QUEUE_URL")
+		if region == "" {
+			region = "ap-northeast-1"
+		}
 
 		cfg, err := config.LoadDefaultConfig(ctx,
 			config.WithRegion(region),
@@ -32,24 +35,44 @@ var webhookReceiverCmd = &cobra.Command{
 		if err != nil {
 			panic(err)
 		}
-		sqsClient := sqs.NewFromConfig(cfg)
+
+		sqsClient := sqs.NewFromConfig(cfg, func(o *sqs.Options) {
+			o.BaseEndpoint = aws.String(endpoint)
+		})
+
+		queueUrl, err := sqsClient.GetQueueUrl(ctx, &sqs.GetQueueUrlInput{
+			QueueName: aws.String("webhook-event-queue"),
+		})
+		if err != nil {
+			panic(err)
+		}
 
 		mux := http.NewServeMux()
-		mux.HandleFunc("POST /webhook", func(w http.ResponseWriter, r *http.Request) {
+		mux.HandleFunc("POST /webhook/", func(w http.ResponseWriter, r *http.Request) {
 			body, err := io.ReadAll(r.Body)
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusBadRequest)
 				return
 			}
 
+			msgBody, err := json.Marshal(map[string]any{
+				"path": r.URL.Path,
+				"body": string(body),
+			})
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+
 			if _, err := sqsClient.SendMessage(ctx, &sqs.SendMessageInput{
-				MessageBody: aws.String(string(body)),
-				QueueUrl:    &queueURL,
+				MessageBody: aws.String(string(msgBody)),
+				QueueUrl:    queueUrl.QueueUrl,
 			}); err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
 			}
 		})
+
 		srv := http.Server{Addr: ":3000", Handler: mux}
 		srv.ListenAndServe()
 	},
