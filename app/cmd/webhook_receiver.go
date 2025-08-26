@@ -72,7 +72,7 @@ var webhookReceiverCmd = &cobra.Command{
 			}
 		})
 
-		srv := http.Server{Addr: ":3000", Handler: mux}
+		srv := http.Server{Addr: os.Getenv("WEBHOOK_RECEIVER_ADDR"), Handler: mux}
 		slog.Info("HTTP Server Started")
 		srv.ListenAndServe()
 	},
