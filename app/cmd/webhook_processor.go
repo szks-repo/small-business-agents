@@ -3,6 +3,8 @@ package cmd
 import (
 	"log/slog"
 	"os"
+	"path/filepath"
+	"runtime"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
@@ -16,7 +18,9 @@ var webhookProcessorCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		ctx := cmd.Context()
 
-		if err := godotenv.Load("../.env"); err != nil {
+		_, file, _, _ := runtime.Caller(0)
+		envPath := filepath.Join(file, "../../../.env")
+		if err := godotenv.Load(envPath); err != nil {
 			slog.Info("No .env file found, using environment variables")
 		}
 
