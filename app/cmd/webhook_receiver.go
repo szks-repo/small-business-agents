@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 	"github.com/spf13/cobra"
+	"github.com/szks-repo/small-business-agents/app/app/pkg/types"
 )
 
 var webhookReceiverCmd = &cobra.Command{
@@ -45,9 +46,9 @@ var webhookReceiverCmd = &cobra.Command{
 				return
 			}
 
-			msgBody, err := json.Marshal(map[string]any{
-				"path": r.URL.Path,
-				"body": string(body),
+			msgBody, err := json.Marshal(&types.WebhookPayload{
+				Path: r.URL.Path,
+				Body: body,
 			})
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -65,7 +66,9 @@ var webhookReceiverCmd = &cobra.Command{
 
 		srv := http.Server{Addr: os.Getenv("WEBHOOK_RECEIVER_ADDR"), Handler: mux}
 		slog.Info("HTTP Server Started")
-		srv.ListenAndServe()
+		if err := srv.ListenAndServe(); err != nil {
+			slog.Warn("ListenAndServe", "error", err)
+		}
 	},
 }
 
