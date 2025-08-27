@@ -32,6 +32,8 @@ var webhookProcessorCmd = &cobra.Command{
 			QueueName: aws.String("webhook-event-queue"),
 		}))
 
+		handler := webhook.NewHandler()
+
 		slog.Info("Worker Started")
 		for {
 			received, err := sqsClient.ReceiveMessage(ctx, &sqs.ReceiveMessageInput{
@@ -53,13 +55,8 @@ var webhookProcessorCmd = &cobra.Command{
 					continue
 				}
 
-				switch webhook.WebhookPathToKind[payload.Path] {
-				case webhook.WebhookKindContactReceived:
-					//
-				case webhook.WebhookKindEmailReceived:
-					//
-				default:
-					slog.Info("Unknown webhook kind", "path", payload.Path)
+				if err := handler.Handle(ctx, &payload); err != nil {
+					slog.Error("Failed to handle message", "error", err)
 				}
 			}
 		}
