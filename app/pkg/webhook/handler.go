@@ -36,6 +36,10 @@ func (h *webhookHandler) handleContactReceived(ctx context.Context, body []byte)
 		return err
 	}
 
+	// 問い合わせ分類Agentへ
+
+	// 後続Agentへ or 終了
+
 	return nil
 }
 
@@ -44,6 +48,10 @@ func (h *webhookHandler) handleEmailReceived(ctx context.Context, body []byte) e
 	if err := e.Unmarshal(body); err != nil {
 		return err
 	}
+
+	// 受信メール分類Agentへ
+
+	// 後続Agentへ or 終了
 
 	return nil
 }
