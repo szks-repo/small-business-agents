@@ -7,6 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
+	"github.com/samber/lo"
 	"github.com/spf13/cobra"
 )
 
@@ -18,12 +19,7 @@ var webhookProcessorCmd = &cobra.Command{
 		endpoint := os.Getenv("SQS_ENDPOINT")
 		region := os.Getenv("AWS_REGION")
 
-		cfg, err := config.LoadDefaultConfig(ctx,
-			config.WithRegion(region),
-		)
-		if err != nil {
-			panic(err)
-		}
+		cfg := lo.Must(config.LoadDefaultConfig(ctx, config.WithRegion(region)))
 
 		sqsClient := sqs.NewFromConfig(cfg, func(o *sqs.Options) {
 			o.BaseEndpoint = aws.String(endpoint)
