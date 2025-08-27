@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"encoding/json"
 	"log/slog"
 	"os"
 
@@ -9,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 	"github.com/samber/lo"
 	"github.com/spf13/cobra"
+	"github.com/szks-repo/small-business-agents/app/app/pkg/types"
 )
 
 var webhookProcessorCmd = &cobra.Command{
@@ -42,7 +44,13 @@ var webhookProcessorCmd = &cobra.Command{
 			}
 
 			for _, msg := range received.Messages {
-				slog.Info("Receive message", "messageId", msg.MessageId)
+				slog.Info("Receive message", "messageId", *msg.MessageId)
+
+				var payload types.WebhookPayload
+				if err := json.Unmarshal([]byte(*msg.Body), &payload); err != nil {
+					slog.Error("Failed to json.Unmarshal", "error", err)
+					continue
+				}
 			}
 		}
 	},

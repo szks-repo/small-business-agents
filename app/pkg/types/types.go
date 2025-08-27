@@ -1,5 +1,10 @@
 package types
 
+type WebhookPayload struct {
+	Path string
+	Body []byte
+}
+
 // Python Agentに渡すペイロード
 type TaskPayload struct {
 	Source   string                 `json:"source"`
