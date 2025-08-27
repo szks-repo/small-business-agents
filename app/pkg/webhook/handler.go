@@ -24,7 +24,7 @@ func (h *webhookHandler) Handle(ctx context.Context, payload *types.WebhookPaylo
 	case WebhookKindContactReceived:
 		return h.handleContactReceived(ctx, payload.Body)
 	case WebhookKindEmailReceived:
-		return h.handleContactReceived(ctx, payload.Body)
+		return h.handleEmailReceived(ctx, payload.Body)
 	default:
 		slog.Info("Unknown webhook kind", "path", payload.Path)
 		return nil
