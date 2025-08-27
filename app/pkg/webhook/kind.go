@@ -8,6 +8,6 @@ const (
 )
 
 var WebhookPathToKind = map[string]WebhookKind{
-	"/contact/received": WebhookKindContactReceived,
-	"/email/received":   WebhookKindEmailReceived,
+	"/webhook/contact/received": WebhookKindContactReceived,
+	"/webhook/email/received":   WebhookKindEmailReceived,
 }
