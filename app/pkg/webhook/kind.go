@@ -7,7 +7,7 @@ const (
 	WebhookKindEmailReceived
 )
 
-var WebhookPath = map[WebhookKind]string{
-	WebhookKindContactReceived: "/contact/ingress",
-	WebhookKindEmailReceived:   "/mail/ingress",
+var WebhookPathToKind = map[string]WebhookKind{
+	"/contact/received": WebhookKindContactReceived,
+	"/email/received":   WebhookKindEmailReceived,
 }

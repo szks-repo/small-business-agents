@@ -11,6 +11,7 @@ import (
 	"github.com/samber/lo"
 	"github.com/spf13/cobra"
 	"github.com/szks-repo/small-business-agents/app/app/pkg/types"
+	"github.com/szks-repo/small-business-agents/app/app/pkg/webhook"
 )
 
 var webhookProcessorCmd = &cobra.Command{
@@ -50,6 +51,15 @@ var webhookProcessorCmd = &cobra.Command{
 				if err := json.Unmarshal([]byte(*msg.Body), &payload); err != nil {
 					slog.Error("Failed to json.Unmarshal", "error", err)
 					continue
+				}
+
+				switch webhook.WebhookPathToKind[payload.Path] {
+				case webhook.WebhookKindContactReceived:
+					//
+				case webhook.WebhookKindEmailReceived:
+					//
+				default:
+					slog.Info("Unknown webhook kind", "path", payload.Path)
 				}
 			}
 		}
