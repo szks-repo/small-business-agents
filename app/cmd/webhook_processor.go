@@ -58,6 +58,13 @@ var webhookProcessorCmd = &cobra.Command{
 				if err := handler.Handle(ctx, &payload); err != nil {
 					slog.Error("Failed to handle message", "error", err)
 				}
+
+				if _, err := sqsClient.DeleteMessage(ctx, &sqs.DeleteMessageInput{
+					QueueUrl:      queueUrl.QueueUrl,
+					ReceiptHandle: msg.ReceiptHandle,
+				}); err != nil {
+					slog.Error("Failed to DeleteMessage", "error", err)
+				}
 			}
 		}
 	},

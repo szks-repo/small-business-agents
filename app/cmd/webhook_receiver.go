@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"crypto/rand"
 	"encoding/json"
 	"io"
 	"log/slog"
@@ -51,8 +52,9 @@ var webhookReceiverCmd = &cobra.Command{
 			}
 
 			if _, err := sqsClient.SendMessage(ctx, &sqs.SendMessageInput{
-				MessageBody: aws.String(string(msgBody)),
-				QueueUrl:    queueUrl.QueueUrl,
+				MessageBody:    aws.String(string(msgBody)),
+				QueueUrl:       queueUrl.QueueUrl,
+				MessageGroupId: aws.String(rand.Text()),
 			}); err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
