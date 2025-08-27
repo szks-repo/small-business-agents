@@ -25,12 +25,9 @@ var webhookProcessorCmd = &cobra.Command{
 			o.BaseEndpoint = aws.String(endpoint)
 		})
 
-		queueUrl, err := sqsClient.GetQueueUrl(ctx, &sqs.GetQueueUrlInput{
+		queueUrl := lo.Must(sqsClient.GetQueueUrl(ctx, &sqs.GetQueueUrlInput{
 			QueueName: aws.String("webhook-event-queue"),
-		})
-		if err != nil {
-			panic(err)
-		}
+		}))
 
 		slog.Info("Worker Started")
 		for {
