@@ -2,7 +2,7 @@ package webhook
 
 import (
 	"context"
-	"log/slog"
+	"fmt"
 
 	"github.com/szks-repo/small-business-agents/app/app/pkg/types"
 	"github.com/szks-repo/small-business-agents/app/app/pkg/webhook/events"
@@ -26,8 +26,7 @@ func (h *webhookHandler) Handle(ctx context.Context, payload *types.WebhookPaylo
 	case WebhookKindEmailReceived:
 		return h.handleEmailReceived(ctx, payload.Body)
 	default:
-		slog.Info("Unknown webhook kind", "path", payload.Path)
-		return nil
+		return fmt.Errorf("Unknown webhook kind: path=%s", payload.Path)
 	}
 }
 
