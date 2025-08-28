@@ -6,6 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.38.1
 	github.com/aws/aws-sdk-go-v2/config v1.31.2
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.42.0
+	github.com/goccy/go-yaml v1.18.0
 	github.com/joho/godotenv v1.5.1
 	github.com/samber/lo v1.51.0
 	github.com/spf13/cobra v1.9.1
