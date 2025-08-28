@@ -1,2 +1,2 @@
-# small-business-agents
+# small-business-inbox-agents
 
