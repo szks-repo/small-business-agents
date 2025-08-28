@@ -33,5 +33,22 @@ services:
     volumes:
       - ./elasticmq.conf:/opt/elasticmq.conf
 
+  pubsub-emulator:
+    image: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
+    container_name: pubsub-emulator
+    command: >
+      bash -c "
+        gcloud beta emulators pubsub start --host-port=0.0.0.0:8085 &
+        sleep 5 &&
+        export PUBSUB_EMULATOR_HOST=localhost:8085 &&
+        gcloud pubsub topics create gmail-notifications &&
+        gcloud pubsub subscriptions create gmail-sub --topic=gmail-notifications &&
+        tail -f /dev/null
+      "
+    ports:
+      - "8085:8085"
+    environment:
+      - PUBSUB_EMULATOR_HOST=0.0.0.0:8085
+
 volumes:
   postgres_data:
