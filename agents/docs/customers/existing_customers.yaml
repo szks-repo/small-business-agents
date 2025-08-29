@@ -1,0 +1,136 @@
+existingCustomers:
+  - id: 1
+    name: XYZ Mart
+    businessDomain: 小売
+    emailDomain: xyz-mart.example.com
+    personInCharge: 田中 浩一
+    txStartDate: 2018-03-01
+    contractType: 年間保守契約
+    workingProjects: []
+    closedProjects:
+      - name: コーポレートサイト構築
+        startDate: 2018-03-01
+        closedDate: 2018-07-30
+      - name: ECサイトリニューアル
+        startDate: 2021-05-15
+        closedDate: 2022-02-28
+
+  - id: 2
+    name: 株式会社グリーンリーフ
+    businessDomain: 農業
+    emailDomain: greenleaf-co.example.com
+    personInCharge: 佐藤 綾乃
+    txStartDate: 2019-11-20
+    contractType: プロジェクト単発
+    workingProjects:
+      - name: ブランドサイト制作
+        startDate: 2024-04-10
+        closedDate: null
+    closedProjects:
+      - name: 採用サイト構築
+        startDate: 2019-11-20
+        closedDate: 2020-03-15
+
+  - id: 3
+    name: 青空ライフサービス
+    businessDomain: 住宅リフォーム
+    emailDomain: aozora-life.example.com
+    personInCharge: 鈴木 健太
+    txStartDate: 2020-07-01
+    contractType: 年間保守契約
+    workingProjects: []
+    closedProjects:
+      - name: LP作成（キャンペーン用）
+        startDate: 2020-07-01
+        closedDate: 2020-08-15
+
+  - id: 4
+    name: フロンティアテック
+    businessDomain: IT
+    emailDomain: frontiertech.example.com
+    personInCharge: 山本 裕司
+    txStartDate: 2021-01-15
+    contractType: プロジェクト単発
+    workingProjects: []
+    closedProjects:
+      - name: コーポレートサイトリニューアル
+        startDate: 2021-01-15
+        closedDate: 2021-09-30
+
+  - id: 5
+    name: ハピネス歯科クリニック
+    businessDomain: 医療
+    emailDomain: happiness-dc.example.com
+    personInCharge: 高橋 美穂
+    txStartDate: 2021-08-05
+    contractType: 年間保守契約
+    workingProjects: []
+    closedProjects:
+      - name: クリニックサイト制作
+        startDate: 2021-08-05
+        closedDate: 2021-12-20
+
+  - id: 6
+    name: サンライズホテル
+    businessDomain: 観光
+    emailDomain: sunrise-hotel.example.com
+    personInCharge: 小林 悟
+    txStartDate: 2022-03-10
+    contractType: プロジェクト単発
+    workingProjects: []
+    closedProjects:
+      - name: 予約システム連携
+        startDate: 2022-03-10
+        closedDate: 2022-08-31
+
+  - id: 7
+    name: 東洋製菓
+    businessDomain: 食品製造
+    emailDomain: toyo-seika.example.com
+    personInCharge: 吉田 拓也
+    txStartDate: 2022-09-25
+    contractType: 年間保守契約
+    workingProjects: []
+    closedProjects:
+      - name: 商品ブランドサイト構築
+        startDate: 2022-09-25
+        closedDate: 2023-04-15
+
+  - id: 8
+    name: 港区スポーツジム
+    businessDomain: スポーツ
+    emailDomain: minato-gym.example.com
+    personInCharge: 渡辺 遥
+    txStartDate: 2023-02-14
+    contractType: 年間保守契約
+    workingProjects: []
+    closedProjects:
+      - name: 会員向けポータルサイト構築
+        startDate: 2023-02-14
+        closedDate: 2023-07-31
+
+  - id: 9
+    name: スカイ不動産
+    businessDomain: 不動産
+    emailDomain: sky-realestate.example.com
+    personInCharge: 中村 浩子
+    txStartDate: 2023-08-22
+    contractType: プロジェクト単発
+    workingProjects: []
+    closedProjects:
+      - name: 物件検索システム開発
+        startDate: 2023-08-22
+        closedDate: 2024-03-10
+
+  - id: 10
+    name: エイトデザイン
+    businessDomain: 建築デザイン
+    emailDomain: eight-design.example.com
+    personInCharge: 藤田 慎一
+    txStartDate: 2024-05-01
+    contractType: プロジェクト単発
+    workingProjects:
+      - name: ポートフォリオサイトリニューアル
+        startDate: 2024-05-01
+        closedDate: null
+    closedProjects: []

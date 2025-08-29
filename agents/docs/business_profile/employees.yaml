@@ -1,0 +1,71 @@
+- id: 1
+  name: 山田 健一
+  role: CEO
+  joiningDate: 2016-04-01
+  leavingDate: null
+
+- id: 2
+  name: 鈴木 彩
+  role: Backoffice
+  joiningDate: 2016-04-01
+  leavingDate: null
+
+- id: 3
+  name: 田中 雄介
+  role: Designer
+  joiningDate: 2016-04-01
+  leavingDate: null
+
+- id: 4
+  name: 佐藤 美咲
+  role: ProjectManager
+  joiningDate: 2016-04-01
+  leavingDate: null
+
+- id: 5
+  name: 高橋 涼太
+  role: FrontendEngineer
+  joiningDate: 2016-04-01
+  leavingDate: null
+
+- id: 6
+  name: 伊藤 匠
+  role: BackendEngineer
+  joiningDate: 2017-09-15
+  leavingDate: null
+
+- id: 7
+  name: 渡辺 遥
+  role: Designer
+  joiningDate: 2018-05-20
+  leavingDate: null
+
+- id: 8
+  name: 中村 裕太
+  role: ProjectManager
+  joiningDate: 2019-01-10
+  leavingDate: null
+
+- id: 9
+  name: 小林 結衣
+  role: FrontendEngineer
+  joiningDate: 2020-03-01
+  leavingDate: 2024-02-29
+
+- id: 10
+  name: 加藤 大地
+  role: MarketingManager
+  joiningDate: 2021-07-01
+  leavingDate: null
+
+- id: 11
+  name: 吉田 莉子
+  role: Intern
+  joiningDate: 2023-04-01
+  leavingDate: null
+
+- id: 12
+  name: 藤原 誠
+  role: BackendEngineer
+  joiningDate: 2022-10-10
+  leavingDate: null
