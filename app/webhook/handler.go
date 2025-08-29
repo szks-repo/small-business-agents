@@ -3,6 +3,8 @@ package webhook
 import (
 	"context"
 	"fmt"
+	"mime"
+	"net/mail"
 
 	"github.com/szks-repo/small-business-agents/app/pkg/events"
 	"github.com/szks-repo/small-business-agents/app/pkg/types"
@@ -12,8 +14,7 @@ type WebhookHandler interface {
 	Handle(ctx context.Context, payload *types.WebhookPayload) error
 }
 
-type webhookHandler struct {
-}
+type webhookHandler struct{}
 
 func NewHandler() WebhookHandler {
 	return &webhookHandler{}
@@ -30,3 +31,4 @@ func (h *webhookHandler) Handle(ctx context.Context, payload *types.WebhookPaylo
 
 	return nil
 }
+

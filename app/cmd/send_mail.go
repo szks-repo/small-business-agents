@@ -7,9 +7,10 @@ import (
 	"net/smtp"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/spf13/cobra"
-	"github.com/szks-repo/small-business-agents/app/pkg/maildata"
+	"github.com/szks-repo/small-business-agents/app/pkg/mail/maildata"
 	smtplib "github.com/szks-repo/small-business-agents/app/pkg/smtp"
 )
 
@@ -47,12 +48,14 @@ func makeHeader(to []string, from, senderName, subject string) string {
 		Address: from,
 	}
 	var buf strings.Builder
-	buf.WriteString("From: " + addr.String())
-	buf.WriteString("\r\n")
-	buf.WriteString("To: " + strings.Join(to, ", "))
-	buf.WriteString("\r\n")
-	buf.WriteString("Subject: " + subject)
-	buf.WriteString("\r\n")
+	buf.WriteString(strings.Join([]string{
+		"Content-Type: text/plain; charset=utf-8",
+		"Date: " + time.Now().Format(time.RFC1123Z),
+		"From: " + addr.String(),
+		"To: " + strings.Join(to, ", "),
+		"Subject: " + subject,
+	}, "\r\n"))
+
 	return buf.String()
 }
 
