@@ -1,0 +1,151 @@
+potentialCustomers:
+  - id: 1
+    name: 富士山建設
+    businessDomain: 建設
+    emailDomain: fujisankensetsu.example.com
+    personInCharge: 佐藤 健司
+    firstContactDate: 2025-01-03
+    budgetRange: 500万円
+    contactHistory:
+      - date: 2025-01-03
+        method: メール
+        memo: 問い合わせフォームから連絡あり。コーポレートサイトの老朽化に悩んでいる。
+    possibleProjects:
+      - コーポレートサイト構築
+      - 採用ページデザイン
+
+  - id: 2
+    name: 株式会社サイバーエッジ
+    businessDomain: IT
+    emailDomain: cyber-edge.example.com
+    personInCharge: 井上 麻衣
+    firstContactDate: 2025-02-10
+    budgetRange: 1000万円
+    contactHistory:
+      - date: 2025-02-10
+        method: 紹介（既存顧客より）
+        memo: 新規事業立ち上げに伴うサービスサイトの相談。競合調査済み。
+    possibleProjects:
+      - サービスサイト構築
+      - Webマーケティング支援
+
+  - id: 3
+    name: スター製薬
+    businessDomain: 製薬
+    emailDomain: star-pharma.example.com
+    personInCharge: 田中 雅也
+    firstContactDate: 2025-03-05
+    budgetRange: 700万円
+    contactHistory:
+      - date: 2025-03-05
+        method: 展示会
+        memo: 医療従事者向けポータルサイト構築に興味。情報量が多く整理が必要。
+    possibleProjects:
+      - 医療従事者向けポータルサイト
+      - CMS導入
+
+  - id: 4
+    name: ライフスタイルクリエーション
+    businessDomain: アパレル
+    emailDomain: lifestyle-creation.example.com
+    personInCharge: 遠藤 恵子
+    firstContactDate: 2025-04-20
+    budgetRange: 300万円
+    contactHistory:
+      - date: 2025-04-20
+        method: 電話
+        memo: ECサイトの売上改善が課題。UI/UXデザイン改善を提案予定。
+    possibleProjects:
+      - ECサイトUI/UX改善
+      - コンバージョン率向上施策
+
+  - id: 5
+    name: 港区法律事務所
+    businessDomain: 士業
+    emailDomain: minato-law.example.com
+    personInCharge: 伊藤 隼人
+    firstContactDate: 2025-05-18
+    budgetRange: 200万円
+    contactHistory:
+      - date: 2025-05-18
+        method: 問い合わせフォーム
+        memo: 専門性をアピールできる事務所サイトを探している。実績が重要。
+    possibleProjects:
+      - 法律事務所サイト制作
+      - 専門家コラムページ構築
+
+  - id: 6
+    name: 株式会社グローバルソリューションズ
+    businessDomain: ソフトウェア
+    emailDomain: globalsolutions.example.com
+    personInCharge: 吉田 慎吾
+    firstContactDate: 2025-06-01
+    budgetRange: 1500万円
+    contactHistory:
+      - date: 2025-06-01
+        method: 紹介（他社より）
+        memo: 新規SaaSプロダクトのWebサイトとLP制作を検討中。
+    possibleProjects:
+      - SaaSプロダクトサイト
+      - サービスLP作成
+
+  - id: 7
+    name: 渋谷カフェテリア
+    businessDomain: 飲食
+    emailDomain: shibuya-cafe.example.com
+    personInCharge: 木村 恵美
+    firstContactDate: 2025-07-10
+    budgetRange: 150万円
+    contactHistory:
+      - date: 2025-07-10
+        method: 電話
+        memo: メニュー変更に伴うWebサイト更新と、テイクアウト予約システムの導入を検討。
+    possibleProjects:
+      - レストランサイトリニューアル
+      - テイクアウト予約システム導入
+
+  - id: 8
+    name: 大手町ファイナンス
+    businessDomain: 金融
+    emailDomain: otemachi-finance.example.com
+    personInCharge: 鈴木 誠
+    firstContactDate: 2025-08-25
+    budgetRange: 800万円
+    contactHistory:
+      - date: 2025-08-25
+        method: 問い合わせフォーム
+        memo: 会社の信用力を高めるためのコーポレートサイト改修。
+    possibleProjects:
+      - コーポレートサイトリニューアル
+      - IR情報ページ構築
+
+  - id: 9
+    name: 未来教育アカデミー
+    businessDomain: 教育
+    emailDomain: mirai-edu.example.com
+    personInCharge: 斉藤 亮
+    firstContactDate: 2025-09-05
+    budgetRange: 400万円
+    contactHistory:
+      - date: 2025-09-05
+        method: 展示会
+        memo: オンライン学習プラットフォームの立ち上げを検討。
+    possibleProjects:
+      - オンライン学習プラットフォーム構築
+      - 会員向けポータルサイト
+
+  - id: 10
+    name: 豊洲ロジスティクス
+    businessDomain: 物流
+    emailDomain: toyosu-logistics.example.com
+    personInCharge: 山田 健一
+    firstContactDate: 2025-10-15
+    budgetRange: 600万円
+    contactHistory:
+      - date: 2025-10-15
+        method: 電話
+        memo: 倉庫管理システムのWebインターフェース開発を検討。
+    possibleProjects:
+      - 業務システムUI/UXデザイン
+      - Webインターフェース開発
+  
