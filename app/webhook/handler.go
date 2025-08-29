@@ -2,9 +2,9 @@ package webhook
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/szks-repo/small-business-agents/app/pkg/events"
+	mailllib "github.com/szks-repo/small-business-agents/app/pkg/mail"
 	"github.com/szks-repo/small-business-agents/app/pkg/types"
 )
 
@@ -24,8 +24,13 @@ func (h *webhookHandler) Handle(ctx context.Context, payload *types.WebhookPaylo
 		return err
 	}
 
-	//TODO
-	fmt.Println("Event===>", event)
+	addr, err := mailllib.ParseFROM(event.From)
+	if err != nil {
+		return err
+	}
+
+	// todo Invoke Agent1
+	_ = addr
 
 	return nil
 }
