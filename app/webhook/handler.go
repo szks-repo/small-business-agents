@@ -3,8 +3,6 @@ package webhook
 import (
 	"context"
 	"fmt"
-	"mime"
-	"net/mail"
 
 	"github.com/szks-repo/small-business-agents/app/pkg/events"
 	"github.com/szks-repo/small-business-agents/app/pkg/types"
@@ -31,4 +29,3 @@ func (h *webhookHandler) Handle(ctx context.Context, payload *types.WebhookPaylo
 
 	return nil
 }
-
