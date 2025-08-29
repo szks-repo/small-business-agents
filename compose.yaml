@@ -11,18 +11,27 @@ services:
     volumes:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - container-network
 
-  mailhog:
-    image: mailhog/mailhog:latest
-    container_name: mailhog
+  mailpit:
+    image: axllent/mailpit:latest
     ports:
       - "1025:1025"
       - "8025:8025"
-    environment:
-      - MH_STORAGE=maildir
-      - MH_MAILDIR_PATH=/maildir
     volumes:
-      - ./data/maildata:/maildir
+      - ./data/mailpit:/data
+    environment:
+      TZ: Asia/Tokyo
+      MP_MAX_MESSAGES: 5000
+      MP_DATABASE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+      MP_SMTP_FORWARD_TO: forward@mailpit.com
+      MP_SMTP_FORWARD_HOST: webhook-receiver
+      MP_SMTP_FORWARD_PORT: 2500
+    networks:
+      - container-network
 
   elasticmq:
     image: softwaremill/elasticmq-native:latest
@@ -32,23 +41,32 @@ services:
       - "9325:9325"
     volumes:
       - ./elasticmq.conf:/opt/elasticmq.conf
+    networks:
+      - container-network
 
-  pubsub-emulator:
-    image: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
-    container_name: pubsub-emulator
-    command: >
-      bash -c "
-        gcloud beta emulators pubsub start --host-port=0.0.0.0:8085 &
-        sleep 5 &&
-        export PUBSUB_EMULATOR_HOST=localhost:8085 &&
-        gcloud pubsub topics create gmail-notifications &&
-        gcloud pubsub subscriptions create gmail-sub --topic=gmail-notifications &&
-        tail -f /dev/null
-      "
-    ports:
-      - "8085:8085"
+  webhook-receiver:
+    build:
+      context: ./app/
+      dockerfile: Dockerfile
+    container_name: webhook-receiver
+    command: ["/server", "webhookReceiver"] 
     environment:
-      - PUBSUB_EMULATOR_HOST=0.0.0.0:8085
+      SQS_ENDPOINT: http://event-queue:9324
+      AWS_REGION: ap-northeast-1
+      AWS_SECRET_ACCESS_KEY: dummy
+      AWS_ACCESS_KEY_ID: dummy
+      WEBHOOK_RECEIVER_ADDR: ":3008"
+    ports:
+      - "2500:2500"
+      - "3008:3008"
+    networks:
+      - container-network
+    depends_on:
+      - elasticmq
 
 volumes:
   postgres_data:
+
+networks:
+  container-network:
+    driver: bridge
