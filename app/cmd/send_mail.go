@@ -9,8 +9,8 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"github.com/szks-repo/small-business-agents/app/app/pkg/maildata"
-	smtplib "github.com/szks-repo/small-business-agents/app/app/pkg/smtp"
+	"github.com/szks-repo/small-business-agents/app/pkg/maildata"
+	smtplib "github.com/szks-repo/small-business-agents/app/pkg/smtp"
 )
 
 var sendMailCmd = &cobra.Command{
