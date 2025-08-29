@@ -2,9 +2,10 @@ package webhook
 
 import (
 	"context"
+	"fmt"
 
-	"github.com/szks-repo/small-business-agents/app/app/pkg/types"
-	"github.com/szks-repo/small-business-agents/app/app/pkg/webhook/events"
+	"github.com/szks-repo/small-business-agents/app/pkg/events"
+	"github.com/szks-repo/small-business-agents/app/pkg/types"
 )
 
 type WebhookHandler interface {
@@ -25,6 +26,7 @@ func (h *webhookHandler) Handle(ctx context.Context, payload *types.WebhookPaylo
 	}
 
 	//TODO
+	fmt.Println("Event===>", event)
 
 	return nil
 }

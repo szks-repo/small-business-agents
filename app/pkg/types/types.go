@@ -1,8 +1,8 @@
 package types
 
 type WebhookPayload struct {
-	Path string
-	Body []byte
+	Path string `json:"path"`
+	Body []byte `json:"body"`
 }
 
 // Python Agentに渡すペイロード

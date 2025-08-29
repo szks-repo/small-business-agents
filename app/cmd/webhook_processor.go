@@ -10,8 +10,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 	"github.com/samber/lo"
 	"github.com/spf13/cobra"
-	"github.com/szks-repo/small-business-agents/app/app/pkg/types"
-	"github.com/szks-repo/small-business-agents/app/app/pkg/webhook"
+	"github.com/szks-repo/small-business-agents/app/pkg/types"
+	"github.com/szks-repo/small-business-agents/app/webhook"
 )
 
 var webhookProcessorCmd = &cobra.Command{
