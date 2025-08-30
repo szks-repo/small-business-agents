@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from qdrant_client.models import ScoredPoint
+# from qdrant_client.models import ScoredPoint
 
 class SearchOutput(BaseModel):
     file_name: str = Field(description="The file name")
@@ -11,13 +11,13 @@ class SearchOutput(BaseModel):
             file_name=hit["_source"]["file_name"], content=hit["_source"]["content"]
         )
 
-    @classmethod
-    def from_point(cls, point: ScoredPoint) -> "SearchOutput":
-        if point.payload is None:
-            raise ValueError("Payload is None")
-        return cls(
-            file_name=point.payload["file_name"], content=point.payload["content"]
-        )
+    # @classmethod
+    # def from_point(cls, point: ScoredPoint) -> "SearchOutput":
+    #     if point.payload is None:
+    #         raise ValueError("Payload is None")
+    #     return cls(
+    #         file_name=point.payload["file_name"], content=point.payload["content"]
+    #     )
 
 
 class Plan(BaseModel):
