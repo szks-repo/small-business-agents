@@ -8,7 +8,7 @@ from langgraph.pregel import Pregel
 from openai import OpenAI
 from openai.types.chat import ChatCompletionMessageParam
 
-from src.models import (
+from models import (
     AgentResult,
     Plan,
     ReflectionResult,
@@ -17,8 +17,8 @@ from src.models import (
     ToolResult,
 )
 
-from agents.prompts import InboxAgentPrompt
-from agents.config import Settings
+from prompts import InboxAgentPrompt
+from config import Settings
 
 class AgentState(TypedDict):
     question: str
@@ -50,3 +50,7 @@ class InboxAgent:
         self.tool_map = {tool.name: tool for tool in tools}
         self.prompts = prompts
         self.client = OpenAI(api_key=self.settings.openai_api_key)
+
+
+    def run_agent(self, question: str = "") -> str:
+        return "implement me"
