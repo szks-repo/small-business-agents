@@ -6,12 +6,6 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.pydantic_v1 import BaseModel as V1BaseModel, Field
 from langgraph.graph import StateGraph, END
 
-# --- Pydanticモデル定義 ---
-class WebhookPayload(BaseModel):
-    source: str
-    content: str
-    metadata: Dict[str, Any]
-
 class ClassificationResponse(BaseModel):
     task_type: str
 
@@ -30,7 +24,6 @@ def get_classifier_agent():
     ])
     return prompt | llm.with_structured_output(TaskClassifier)
 
-# --- LangGraphでの専門エージェントの例（セールス問い合わせ） ---
 class SalesInquiryState(V1BaseModel):
     original_inquiry: str
     draft_response: str = ""
@@ -46,7 +39,6 @@ def draft_sales_response(state: SalesInquiryState):
     return {"draft_response": response.content}
 
 def finalize_response(state: SalesInquiryState):
-    # ここでは単純にドラフトを最終結果とするが、レビューや情報追加のステップも可能
     return {"final_response": state.draft_response}
 
 def build_sales_agent_graph():

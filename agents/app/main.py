@@ -17,14 +17,6 @@ class ExecutionResponse(BaseModel):
 
 app = FastAPI()
 
-# classifier_agent = get_class()
-# sales_agent = build_sales_agent_graph()
-# @app.post("/classify", response_model=ClassificationResponse)
-# async def classify_task(payload: WebhookPayload):
-#     """タスクの内容を分類する"""
-#     result = classifier_agent.invoke({"inquiry": payload.content})
-#     return ClassificationResponse(task_type=result.task_type)
-
 @app.get("/health")
 def read_root():
     return {"status": "healthy"}
