@@ -5,6 +5,9 @@ import uvicorn
 
 from agent import InboxAgent
 from config import Settings
+from logger import setup_logger
+
+logger = setup_logger(__file__)
 
 class InboxRequest(BaseModel):
     from_address: str
@@ -26,9 +29,7 @@ def read_root():
 
 @app.post("/inbox", response_model=ExecutionResponse)
 async def execute_task(payload: InboxRequest):
-    print("--- Received full ---")
-    print(payload.model_dump_json(indent=2))
-    print("---------------------------------")
+    logger.info(f"/inbox: {payload.model_dump_json(indent=2)}")
 
     agent = InboxAgent(settings=Settings(
         openai_api_key="",
