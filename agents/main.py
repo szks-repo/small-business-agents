@@ -35,7 +35,9 @@ async def execute_task(payload: InboxRequest):
         openai_api_base="",
         openai_model="gpt4.1",
     ))
-    result = agent.run_agent()
+    result = agent.run_agent(question="""
+todo: build question
+""")
 
     return ExecutionResponse(result=result)
 
