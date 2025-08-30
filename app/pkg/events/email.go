@@ -3,6 +3,7 @@ package events
 import (
 	"encoding/json"
 	"net/mail"
+	"strings"
 )
 
 type EmailReceived struct {
@@ -21,7 +22,7 @@ func (p *EmailReceived) Unmarshal(data []byte) error {
 	p.To = dst.To
 	p.CC = dst.CC
 	p.Subject = dst.Subject
-	p.Body = dst.Body
+	p.Body = strings.ReplaceAll(dst.Body, "\r\n", "\n")
 	p.Header = dst.Header
 	return nil
 }
