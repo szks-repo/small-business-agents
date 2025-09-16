@@ -49,7 +49,7 @@ class InboxAgent:
         self.tools = tools
         self.tool_map = {tool.name: tool for tool in tools}
         self.prompts = prompts
-        self.client = OpenAI(api_key=self.settings.openai_api_key)
+        # self.client = OpenAI(api_key=self.settings.openai_api_key)
 
 
     def run_agent(self, question: str = "") -> str:

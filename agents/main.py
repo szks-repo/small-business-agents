@@ -46,9 +46,7 @@ async def execute_task(payload: InboxRequest):
     logger.info(f"/inbox: {payload.model_dump_json(indent=2)}")
 
     agent = InboxAgent(settings=Settings(
-        openai_api_key="",
-        openai_api_base="",
-        openai_model="gpt4.1",
+        model="gpt-oss:20b",
     ))
     result = agent.run_agent(question="""
 todo: build question
