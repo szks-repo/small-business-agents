@@ -7,6 +7,8 @@ from agent import InboxAgent
 from config import Settings
 from logger import setup_logger
 
+from ollama import chat
+
 logger = setup_logger(__file__)
 
 class InboxRequest(BaseModel):
@@ -24,8 +26,20 @@ class ExecutionResponse(BaseModel):
 app = FastAPI()
 
 @app.get("/health")
-def read_root():
+async def health_check():
     return {"status": "healthy"}
+
+@app.get("/ollama")
+async def call_ollama():
+    response = chat(
+        model="gpt-oss:20b",
+        messages=[{ 'role': 'user', 'content': 'こんにちは' }],
+        think=True,
+        options={ "temperature": 0, "num_ctx": 512 }
+    )
+
+    return response
+
 
 @app.post("/inbox", response_model=ExecutionResponse)
 async def execute_task(payload: InboxRequest):
